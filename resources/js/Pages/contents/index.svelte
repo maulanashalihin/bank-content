@@ -151,7 +151,7 @@
       </p>
       
       <!-- Create Content Button -->
-      <a href="/contents/create" use:inertia 
+      <a href="/contents/create"  
          class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold rounded-full hover:from-emerald-700 hover:to-teal-700 transform hover:scale-105 transition-all duration-200 shadow-lg">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -264,7 +264,7 @@
     </div>
 
     <!-- Popular Tags Quick Filter -->
-    {#if contents.length > 0}
+    {#if contents && contents.length > 0}
       {@const allTags = contents.flatMap(content => content.tags ? content.tags.split(',').map(tag => tag.trim()) : []).filter(tag => tag)}
       {@const tagCounts = allTags.reduce((acc, tag) => { acc[tag] = (acc[tag] || 0) + 1; return acc; }, {})}
       {@const popularTags = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]).slice(0, 8)}
@@ -442,7 +442,7 @@
         <p class="text-gray-600 dark:text-gray-400 mb-8 max-w-md mx-auto">
           Mulai buat konten pertama Anda dan bagikan kreativitas dengan dunia!
         </p>
-        <a href="/contents/create" use:inertia 
+        <a href="/contents/create"   
            class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold rounded-full hover:from-emerald-700 hover:to-teal-700 transform hover:scale-105 transition-all duration-200 shadow-lg">
           <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
