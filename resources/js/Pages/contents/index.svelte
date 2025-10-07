@@ -294,39 +294,38 @@
     {#if contents.length > 0}
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
         {#each contents as content}
-          <div class="group bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border border-gray-200 dark:border-gray-700 overflow-hidden">
-            
-            <!-- Content Preview -->
-            <div class="relative h-48 bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900 dark:to-teal-900 flex items-center justify-center">
-              {#if content.file_path && (content.content_type_id === 'image')}
-                <img src={content.file_path} alt={content.title} class="w-full h-full object-cover" />
-              {:else if content.youtube_url}
-                <div class="text-6xl">🎬</div>
-              {:else}
-                <div class="text-6xl">{getContentTypeIcon(content.content_type_id)}</div>
-              {/if}
+          <a href="/contents/{content.id}"   class="group block">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border border-gray-200 dark:border-gray-700 overflow-hidden cursor-pointer">
               
-              <!-- Content Type Badge -->
-              <div class="absolute top-3 left-3">
-                <span class="px-3 py-1 text-xs font-semibold rounded-full {getContentTypeColor(content.content_type_id)}">
-                  {content.content_type_name}
-                </span>
-              </div>
+              <!-- Content Preview -->
+              <div class="relative h-48 bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900 dark:to-teal-900 flex items-center justify-center">
+                {#if content.file_path && (content.content_type_id === 'image')}
+                  <img src={content.file_path} alt={content.title} class="w-full h-full object-cover" />
+                {:else if content.youtube_url}
+                  <div class="text-6xl">🎬</div>
+                {:else}
+                  <div class="text-6xl">{getContentTypeIcon(content.content_type_id)}</div>
+                {/if}
+                
+                <!-- Content Type Badge -->
+                <div class="absolute top-3 left-3">
+                  <span class="px-3 py-1 text-xs font-semibold rounded-full {getContentTypeColor(content.content_type_id)}">
+                    {content.content_type_name}
+                  </span>
+                </div>
 
-              <!-- Actions Overlay -->
-              <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                <div class="flex space-x-2">
-                  <a href="/contents/{content.id}" use:inertia 
-                     class="p-2 bg-white text-gray-800 rounded-full hover:bg-gray-100 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                    </svg>
-                  </a>
-
+                <!-- Hover Overlay -->
+                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+                  <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div class="bg-white bg-opacity-90 rounded-full p-3">
+                      <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                      </svg>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
 
             <!-- Content Info -->
             <div class="p-5">
@@ -384,6 +383,7 @@
               </div>
             </div>
           </div>
+        </a>
         {/each}
       </div>
 

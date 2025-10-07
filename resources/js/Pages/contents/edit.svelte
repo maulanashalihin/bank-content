@@ -1,5 +1,6 @@
 <script>
-  import { router } from '@inertiajs/svelte';
+  import { router, inertia } from '@inertiajs/svelte';
+  import axios from 'axios';
   import Header from '../../Components/Header.svelte';
   import CarouselUpload from '../../Components/CarouselUpload.svelte';
   import S3Upload from '../../Components/S3Upload.svelte';
@@ -33,7 +34,7 @@
 
   // Handler for S3 uploads
   function handleS3Upload(event) {
-    const uploadedFile = event.detail.files[0];
+    const uploadedFile = event.detail.file;
     selectedFile = uploadedFile;
     removeExistingFile = false;
   }
@@ -51,6 +52,12 @@
     } else {
       previewUrl = null;
     }
+  }
+
+  function removeFile() {
+    selectedFile = null;
+    removeExistingFile = true;
+    previewUrl = null;
   }
 
   function getContentTypeInfo(typeId) {
@@ -83,6 +90,29 @@
       icon: icons[typeId] || '📄',
       color: colors[typeId] || 'bg-gray-100 text-gray-800'
     };
+  }
+
+  // Format file size
+  function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+
+  // Get file icon based on file type
+  function getFileIcon(file) {
+    if (!file || !file.type) return '📄';
+    
+    if (file.type.startsWith('image/')) return '🖼️';
+    if (file.type.startsWith('video/')) return '🎥';
+    if (file.type.includes('pdf')) return '📕';
+    if (file.type.includes('word') || file.type.includes('document')) return '📝';
+    if (file.type.includes('excel') || file.type.includes('spreadsheet')) return '📊';
+    if (file.type.includes('powerpoint') || file.type.includes('presentation')) return '📊';
+    
+    return '📄';
   }
 
   async function submitForm() {
@@ -132,25 +162,34 @@
         }
       }, 200);
 
-      // Use JSON submission for all content types
-      router.put(`/contents/${content.id}`, submitData, {
-        onSuccess: () => {
-          uploadProgress = 100;
-          setTimeout(() => {
-            clearInterval(progressInterval);
-            isUploading = false;
-          }, 500);
-        },
-        onError: (errors) => {
-          console.error('Update failed:', errors);
-          clearInterval(progressInterval);
-          isUploading = false;
-          uploadProgress = 0;
+      // Use axios for JSON submission
+      const response = await axios.put(`/contents/${content.id}`, submitData, {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'
         }
       });
+
+      // Handle success
+      uploadProgress = 100;
+      setTimeout(() => {
+        clearInterval(progressInterval);
+        isUploading = false;
+        // Navigate back to content detail page
+        router.visit(`/contents/${content.id}`);
+      }, 500);
     } catch (error) {
+      console.error('Update failed:', error);
+      clearInterval(progressInterval);
       isUploading = false;
       uploadProgress = 0;
+      
+      // Show error message to user
+      if (error.response && error.response.data && error.response.data.message) {
+        alert('Error: ' + error.response.data.message);
+      } else {
+        alert('Terjadi kesalahan saat memperbarui konten. Silakan coba lagi.');
+      }
     }
   }
 </script>

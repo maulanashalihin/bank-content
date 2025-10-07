@@ -54,6 +54,20 @@ class S3Service {
     generateProductImageKey(originalName) {
         return this.generateFileKey(originalName, "products/images");
     }
+    async deleteFile(key) {
+        try {
+            const command = new client_s3_1.DeleteObjectCommand({
+                Bucket: this.bucket,
+                Key: key,
+            });
+            await this.client.send(command);
+            return true;
+        }
+        catch (error) {
+            console.error('Error deleting file from S3:', error);
+            return false;
+        }
+    }
     getBucket() {
         return this.bucket;
     }

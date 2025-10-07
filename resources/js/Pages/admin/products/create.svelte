@@ -30,7 +30,7 @@
     }
 </script>
 
-<Header group="admin" />
+<Header group="products" />
 
 <div class="max-w-4xl mx-auto p-4">
     <div class="flex items-center mb-6">
@@ -105,7 +105,7 @@
                                 <input 
                                     bind:checked={form.is_active} type="checkbox" name="is_active" id="is_active" 
                                     class="w-4 h-4 text-emerald-600 bg-gray-100 border-gray-300 rounded focus:ring-emerald-500 dark:focus:ring-emerald-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                >
+                                
                                 <span class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                     Produk Aktif
                                 </span>

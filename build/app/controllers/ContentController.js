@@ -283,7 +283,7 @@ class ContentController {
             await DB_1.default.table('contents')
                 .where('id', id)
                 .update(updateData);
-            return response.redirect(`/contents/${id}`);
+            return response.send("OK");
         }
         catch (error) {
             console.error('Error updating content:', error);

@@ -11,6 +11,7 @@ const AssetController_1 = __importDefault(require("../app/controllers/AssetContr
 const ProductController_1 = __importDefault(require("../app/controllers/ProductController"));
 const ContentController_1 = __importDefault(require("../app/controllers/ContentController"));
 const S3Controller_1 = __importDefault(require("../app/controllers/S3Controller"));
+const UserController_1 = __importDefault(require("../app/controllers/UserController"));
 const hyper_express_1 = __importDefault(require("hyper-express"));
 const Route = new hyper_express_1.default.Router();
 Route.get("/", HomeController_1.default.index);
@@ -39,6 +40,13 @@ Route.put("/admin/products/:id", [admin_1.default], ProductController_1.default.
 Route.delete("/admin/products/:id", [admin_1.default], ProductController_1.default.destroy);
 Route.get("/api/products/search", [auth_1.default], ProductController_1.default.search);
 Route.get("/api/products/:id", [auth_1.default], ProductController_1.default.getById);
+Route.get("/admin/users", [admin_1.default], UserController_1.default.index);
+Route.get("/admin/users/create", [admin_1.default], UserController_1.default.create);
+Route.post("/admin/users", [admin_1.default], UserController_1.default.store);
+Route.get("/admin/users/:id", [admin_1.default], UserController_1.default.show);
+Route.get("/admin/users/:id/edit", [admin_1.default], UserController_1.default.edit);
+Route.put("/admin/users/:id", [admin_1.default], UserController_1.default.update);
+Route.delete("/admin/users/:id", [admin_1.default], UserController_1.default.destroy);
 Route.get("/contents", [auth_1.default], ContentController_1.default.index);
 Route.get("/contents/create", [auth_1.default], ContentController_1.default.create);
 Route.post("/contents", [auth_1.default], ContentController_1.default.store);

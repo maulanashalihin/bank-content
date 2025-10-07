@@ -6,6 +6,7 @@ import AssetController from "../app/controllers/AssetController";
 import ProductController from "../app/controllers/ProductController";
 import ContentController from "../app/controllers/ContentController";
 import S3Controller from "../app/controllers/S3Controller";
+import UserController from "../app/controllers/UserController";
 import HyperExpress from 'hyper-express';
 
 const Route = new HyperExpress.Router();
@@ -98,6 +99,28 @@ Route.delete("/admin/products/:id", [Admin], ProductController.destroy);
 // User product search routes
 Route.get("/api/products/search", [Auth], ProductController.search);
 Route.get("/api/products/:id", [Auth], ProductController.getById);
+
+/**
+ * User Management Routes (Admin Only)
+ * Routes for managing users in admin panel
+ * ------------------------------------------------
+ * GET    /admin/users - User listing with search and pagination
+ * GET    /admin/users/create - User creation form
+ * POST   /admin/users - Store new user
+ * GET    /admin/users/:id - View single user details
+ * GET    /admin/users/:id/edit - User edit form
+ * PUT    /admin/users/:id - Update user
+ * DELETE /admin/users/:id - Delete user
+ */
+
+// Admin user management routes
+Route.get("/admin/users", [Admin], UserController.index);
+Route.get("/admin/users/create", [Admin], UserController.create);
+Route.post("/admin/users", [Admin], UserController.store);
+Route.get("/admin/users/:id", [Admin], UserController.show);
+Route.get("/admin/users/:id/edit", [Admin], UserController.edit);
+Route.put("/admin/users/:id", [Admin], UserController.update);
+Route.delete("/admin/users/:id", [Admin], UserController.destroy);
 
 /**
  * Content Management Routes

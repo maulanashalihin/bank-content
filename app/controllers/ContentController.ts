@@ -371,7 +371,7 @@ class ContentController {
         .where('id', id)
         .update(updateData);
 
-      return response.redirect(`/contents/${id}`);
+      return response.send("OK")
     } catch (error) {
       console.error('Error updating content:', error);
       return response.status(500).json({ error: 'Internal server error' });

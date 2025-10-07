@@ -1,4 +1,4 @@
-import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 class S3Service {
@@ -108,6 +108,26 @@ class S3Service {
    */
   generateProductImageKey(originalName: string): string {
     return this.generateFileKey(originalName, "products/images");
+  }
+
+  /**
+   * Delete a file from S3
+   * @param key - The file key/path in S3 to delete
+   * @returns Promise<boolean> - True if deletion was successful
+   */
+  async deleteFile(key: string): Promise<boolean> {
+    try {
+      const command = new DeleteObjectCommand({
+        Bucket: this.bucket,
+        Key: key,
+      });
+
+      await this.client.send(command);
+      return true;
+    } catch (error) {
+      console.error('Error deleting file from S3:', error);
+      return false;
+    }
   }
 
   /**

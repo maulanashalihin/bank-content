@@ -23,7 +23,7 @@
     }
 </script>
 
-<Header group="admin" />
+<Header group="products" />
 
 <div class="max-w-7xl mx-auto p-4">
     <div class="flex justify-between items-center mb-6">
