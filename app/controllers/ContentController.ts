@@ -182,7 +182,7 @@ class ContentController {
 
       await DB.table('contents').insert(contentData);
 
-      return response.redirect('/contents');
+      return response.redirect('/contents/' + contentId + "/edit");
     } catch (error) {
       console.error('Error creating content:', error);
       return response.status(500).json({ error: 'Internal server error' });

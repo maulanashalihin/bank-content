@@ -40,7 +40,8 @@
         
         <div class="space-y-4">
             <div>
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <!-- svelte-ignore a11y_no_native_role -->
+                <label for="product-search" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                     Pilih Produk
                 </label>
                 <ProductSearch
@@ -126,7 +127,9 @@
                             </div>
                         </div>
                         
+                        <!-- svelte-ignore a11y_no_native_role -->
                         <button
+                            aria-label="Hapus produk dari daftar"
                             on:click={() => removeFromList(product.id)}
                             class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-200"
                         >

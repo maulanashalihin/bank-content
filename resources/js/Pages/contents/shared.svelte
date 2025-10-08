@@ -93,7 +93,8 @@
         <div class="flex items-center space-x-2">
           <button 
             on:click={copyToClipboard}
-            class="p-2 bg-purple-100 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 rounded-lg hover:bg-purple-200 dark:hover:bg-purple-900/40 transition-colors">
+            class="p-2 bg-purple-100 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 rounded-lg hover:bg-purple-200 dark:hover:bg-purple-900/40 transition-colors"
+            aria-label="Salin link konten">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
             </svg>
@@ -102,7 +103,8 @@
           {#if content.file_path}
             <button 
               on:click={downloadContent}
-              class="p-2 bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-900/40 transition-colors">
+              class="p-2 bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-900/40 transition-colors"
+              aria-label="Download konten">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
               </svg>
@@ -164,7 +166,8 @@
               src={content.youtube_url.replace('watch?v=', 'embed/')}
               class="w-full h-full rounded-lg"
               frameborder="0"
-              allowfullscreen>
+              allowfullscreen
+              title="Video YouTube: {content.title}">
             </iframe>
           </div>
         {:else if content.file_path && content.content_type_id === 'image'}
@@ -181,6 +184,7 @@
               class="w-full max-h-96 rounded-lg shadow-lg"
               poster={content.thumbnail_path}>
               <source src={content.file_path} type="video/mp4">
+              <track kind="captions" src="" srclang="id" label="Indonesian" default>
               Your browser does not support the video tag.
             </video>
           </div>

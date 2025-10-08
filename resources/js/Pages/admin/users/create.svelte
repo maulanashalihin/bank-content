@@ -64,7 +64,7 @@
 
 <div class="max-w-4xl mx-auto p-4">
     <div class="flex items-center mb-6">
-        <a href="/admin/users" use:inertia class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200 mr-4">
+        <a href="/admin/users" use:inertia class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200 mr-4" aria-label="Kembali ke daftar user">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
             </svg>

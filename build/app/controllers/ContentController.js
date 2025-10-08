@@ -135,7 +135,7 @@ class ContentController {
                 updated_at: now
             };
             await DB_1.default.table('contents').insert(contentData);
-            return response.redirect('/contents');
+            return response.redirect('/contents/' + contentId + "/edit");
         }
         catch (error) {
             console.error('Error creating content:', error);

@@ -52,7 +52,7 @@
 <div class="max-w-4xl mx-auto p-4">
     <div class="flex items-center justify-between mb-6">
         <div class="flex items-center">
-            <a href="/admin/users" use:inertia class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200 mr-4">
+            <a href="/admin/users" use:inertia class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200 mr-4" aria-label="Kembali ke daftar user">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
@@ -212,15 +212,25 @@
 
 <!-- Delete Confirmation Modal -->
 {#if showDeleteModal}
-    <div class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50" on:click={cancelDelete}>
-        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white dark:bg-gray-800" on:click|stopPropagation>
+    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+    <div class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50" 
+         role="dialog" 
+         aria-modal="true" 
+         aria-labelledby="modal-title"
+         on:click={cancelDelete} 
+         on:keydown={(e) => e.key === 'Escape' && cancelDelete()}>
+        <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white dark:bg-gray-800" 
+             role="document"
+             on:click|stopPropagation 
+             on:keydown|stopPropagation>
             <div class="mt-3 text-center">
                 <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 dark:bg-red-900">
                     <svg class="h-6 w-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
                     </svg>
                 </div>
-                <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white mt-4">Hapus User</h3>
+                <h3 id="modal-title" class="text-lg leading-6 font-medium text-gray-900 dark:text-white mt-4">Hapus User</h3>
                 <div class="mt-2 px-7 py-3">
                     <p class="text-sm text-gray-500 dark:text-gray-400">
                         Apakah Anda yakin ingin menghapus user <strong>{user.name}</strong>? 

@@ -190,10 +190,11 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <!-- Title -->
           <div class="md:col-span-2">
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label for="content-title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               ✏️ Judul Konten *
             </label>
             <input 
+              id="content-title"
               bind:value={form.title}
               type="text" 
               required
@@ -204,10 +205,11 @@
 
           <!-- Product -->
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label for="content-product" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               🏷️ Produk Terkait
             </label>
             <select 
+              id="content-product"
               bind:value={form.product_id}
               class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
               <option value="">Pilih Produk (Opsional)</option>
@@ -219,10 +221,11 @@
 
           <!-- Tags -->
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label for="content-tags" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               🏷️ Tag
             </label>
             <input 
+              id="content-tags"
               bind:value={form.tags}
               type="text" 
               placeholder="marketing, email, promo (pisahkan dengan koma)"
@@ -241,10 +244,11 @@
         <!-- YouTube URL (if youtube_video type) -->
         {#if form.content_type_id === 'youtube_video'}
           <div class="mb-6">
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label for="youtube-url" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               🎬 URL YouTube
             </label>
             <input 
+              id="youtube-url"
               bind:value={form.youtube_url}
               type="url" 
               placeholder="https://www.youtube.com/watch?v=..."
@@ -255,10 +259,11 @@
 
         <!-- Text Content -->
         <div class="mb-6">
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label for="content-text" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             📄 Konten Teks
           </label>
           <textarea 
+            id="content-text"
             bind:value={form.content_text}
             rows="6"
             placeholder="Tulis konten Anda di sini... Bisa berupa deskripsi, copy email, caption, atau konten lainnya."
@@ -269,7 +274,8 @@
         <!-- File Upload Area -->
         {#if form.content_type_id !== 'youtube_video'}
           <div class="mb-6">
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <!-- svelte-ignore a11y_no_native_role -->
+            <label for="file-upload" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               {#if form.content_type_id === 'carousel'}
                 🎠 File Carousel (Gambar & Video)
               {:else}

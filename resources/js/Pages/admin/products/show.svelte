@@ -144,7 +144,7 @@
                     <div class="space-y-2">
                         {#if product.image_url}
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">URL Gambar</label>
+                                <div class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">URL Gambar</div>
                                 <a href={product.image_url} 
                                    target="_blank" 
                                    rel="noopener noreferrer"
@@ -155,7 +155,7 @@
                         {/if}
                         {#if product.product_url}
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">URL Produk</label>
+                                <div class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">URL Produk</div>
                                 <a href={product.product_url} 
                                    target="_blank" 
                                    rel="noopener noreferrer"

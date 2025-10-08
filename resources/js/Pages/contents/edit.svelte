@@ -163,12 +163,7 @@
       }, 200);
 
       // Use axios for JSON submission
-      const response = await axios.put(`/contents/${content.id}`, submitData, {
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest'
-        }
-      });
+      const response = await axios.put(`/contents/${content.id}`, submitData);
 
       // Handle success
       uploadProgress = 100;
@@ -252,10 +247,11 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <!-- Title -->
           <div class="md:col-span-2">
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label for="edit-title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               ✏️ Judul Konten *
             </label>
             <input 
+              id="edit-title"
               bind:value={form.title}
               type="text" 
               required
@@ -266,10 +262,11 @@
 
           <!-- Product -->
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label for="edit-product" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               🏷️ Produk Terkait
             </label>
             <select 
+              id="edit-product"
               bind:value={form.product_id}
               class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
               <option value="">Pilih Produk (Opsional)</option>
@@ -281,10 +278,11 @@
 
           <!-- Tags -->
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label for="edit-tags" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               🏷️ Tag
             </label>
             <input 
+              id="edit-tags"
               bind:value={form.tags}
               type="text" 
               placeholder="marketing, email, promo (pisahkan dengan koma)"
@@ -303,10 +301,11 @@
         <!-- YouTube URL (if youtube_video type) -->
         {#if form.content_type_id === 'youtube_video'}
           <div class="mb-6">
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label for="edit-youtube-url" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               🎬 URL YouTube
             </label>
             <input 
+              id="edit-youtube-url"
               bind:value={form.youtube_url}
               type="url" 
               placeholder="https://www.youtube.com/watch?v=..."
@@ -317,10 +316,11 @@
 
         <!-- Text Content -->
         <div class="mb-6">
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label for="edit-content-text" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             📄 Konten Teks
           </label>
           <textarea 
+            id="edit-content-text"
             bind:value={form.content_text}
             rows="6"
             placeholder="Tulis konten Anda di sini... Bisa berupa deskripsi, copy email, caption, atau konten lainnya."
@@ -331,7 +331,7 @@
         <!-- File Upload Area -->
         {#if form.content_type_id !== 'youtube_video'}
           <div class="mb-6">
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label for="edit-file" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               {#if form.content_type_id === 'carousel'}
                 🎠 File Carousel (Gambar & Video)
               {:else}

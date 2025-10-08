@@ -248,7 +248,8 @@
               <button 
                 on:click={openShareModal}
                 class="p-2 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition-colors"
-                title="Bagikan">
+                title="Bagikan"
+                aria-label="Bagikan konten">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path>
                 </svg>
@@ -258,7 +259,8 @@
                 <button 
                   on:click={downloadContent}
                   class="p-2 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition-colors"
-                  title="Download">
+                  title="Download"
+                  aria-label="Download konten">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                   </svg>
@@ -267,7 +269,8 @@
               
               <a href="/contents/{content.id}/edit" use:inertia 
                  class="p-2 bg-purple-100 text-purple-600 rounded-lg hover:bg-purple-200 transition-colors"
-                 title="Edit">
+                 title="Edit"
+                 aria-label="Edit konten">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                 </svg>
@@ -276,7 +279,8 @@
               <button 
                 on:click={deleteContent}
                 class="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
-                title="Hapus">
+                title="Hapus"
+                aria-label="Hapus konten">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                 </svg>
@@ -301,6 +305,7 @@
                       class="w-full h-48 object-cover rounded-lg shadow-lg transition-transform group-hover:scale-105"
                     />
                   {:else if file.type?.startsWith('video/')}
+                    <!-- svelte-ignore a11y_media_has_caption -->
                     <video 
                       src={file.url}
                       class="w-full h-48 object-cover rounded-lg shadow-lg"
@@ -343,6 +348,7 @@
             />
           </div>
         {:else if content.file_path && content.file_type?.startsWith('video/')}
+          <!-- svelte-ignore a11y_media_has_caption -->
           <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 border border-gray-200 dark:border-gray-700">
             <video 
               src={content.file_path}
@@ -488,7 +494,8 @@
         <h3 class="text-xl font-bold text-gray-900 dark:text-white">📤 Bagikan Konten</h3>
         <button 
           on:click={closeShareModal}
-          class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+          class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+          aria-label="Tutup modal">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
@@ -497,10 +504,11 @@
 
       <!-- Share Message -->
       <div class="mb-6">
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label for="share-message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Pesan (Opsional)
         </label>
         <textarea 
+          id="share-message"
           bind:value={shareMessage}
           placeholder="Tambahkan pesan untuk sharing..."
           class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
@@ -510,11 +518,12 @@
 
       <!-- Share URL -->
       <div class="mb-6">
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label for="share-url" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Link Konten
         </label>
         <div class="flex">
           <input 
+            id="share-url"
             type="text" 
             value={shareUrl}
             readonly
@@ -522,7 +531,8 @@
           />
           <button 
             on:click={copyToClipboard}
-            class="px-4 py-2 bg-purple-600 text-white rounded-r-lg hover:bg-purple-700 transition-colors text-sm">
+            class="px-4 py-2 bg-purple-600 text-white rounded-r-lg hover:bg-purple-700 transition-colors text-sm"
+            aria-label="Salin link">
             {copySuccess ? '✓' : '📋'}
           </button>
         </div>

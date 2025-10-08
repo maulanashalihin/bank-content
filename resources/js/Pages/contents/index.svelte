@@ -166,11 +166,12 @@
         
         <!-- Search -->
         <div class="md:col-span-2">
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label for="search-content" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             🔍 Cari Konten
           </label>
           <div class="relative">
             <input 
+              id="search-content"
               bind:value={searchQuery}
               on:input={handleFilterChange}
               type="text" 
@@ -180,7 +181,8 @@
             {#if searchQuery}
               <button 
                 on:click={() => { searchQuery = ''; handleFilterChange(); }}
-                class="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600">
+                class="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600"
+                aria-label="Hapus pencarian">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
@@ -191,10 +193,11 @@
 
         <!-- Product Filter -->
         <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label for="filter-product" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             🏷️ Produk
           </label>
           <select 
+            id="filter-product"
             bind:value={selectedProduct}
             on:change={applyFilters}
             class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
@@ -207,10 +210,11 @@
 
         <!-- Content Type Filter -->
         <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label for="filter-content-type" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             📂 Jenis Konten
           </label>
           <select 
+            id="filter-content-type"
             bind:value={selectedContentType}
             on:change={applyFilters}
             class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
@@ -395,7 +399,8 @@
             <button 
               on:click={() => goToPage(pagination.current_page - 1)}
               disabled={pagination.current_page === 1}
-              class="px-3 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-600">
+              class="px-3 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-600"
+              aria-label="Halaman sebelumnya">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
               </svg>
@@ -417,7 +422,8 @@
             <button 
               on:click={() => goToPage(pagination.current_page + 1)}
               disabled={pagination.current_page === pagination.last_page}
-              class="px-3 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-600">
+              class="px-3 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-600"
+              aria-label="Halaman selanjutnya">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
               </svg>
