@@ -22,8 +22,8 @@ class S3Controller {
       let allowedTypes = [];
       let errorMessage = "";
 
-      if (folder === "carousel") {
-        // Allow images and videos for carousel
+      if (folder === "carousel" || folder === "uploads") {
+        // Allow images and videos for carousel and uploads
         allowedTypes = [
           "image/jpeg",
           "image/jpg", 
@@ -35,11 +35,18 @@ class S3Controller {
           "video/mpeg",
           "video/quicktime",
           "video/x-msvideo", // .avi
-          "video/webm"
+          "video/webm",
+          "application/pdf",
+          "application/msword",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "application/vnd.ms-excel",
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "application/vnd.ms-powerpoint",
+          "application/vnd.openxmlformats-officedocument.presentationml.presentation"
         ];
-        errorMessage = "Only image and video files are allowed for carousel";
+        errorMessage = "Only image, video, and document files are allowed";
       } else {
-        // Default: only images
+        // Default: only images for other folders (like products)
         allowedTypes = [
           "image/jpeg",
           "image/jpg", 

@@ -197,8 +197,8 @@
           </div>
         {/if}
         <div class="text-sm">
-          <p class="font-medium text-gray-900">{selectedFile.filename}</p>
-          <p class="text-gray-500">{formatFileSize(selectedFile.size)}</p>
+          <p class="font-medium text-gray-900 dark:text-white">{selectedFile.filename}</p>
+          <p class="text-gray-500 dark:text-gray-400">{formatFileSize(selectedFile.size)}</p>
         </div>
         <button
           type="button"
