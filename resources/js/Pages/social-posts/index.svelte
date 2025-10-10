@@ -45,6 +45,7 @@
             <th class="text-left p-2">URL</th>
             <th class="text-left p-2">Status</th>
             <th class="text-left p-2">Skor</th>
+            <th class="text-left p-2">Terakhir Sinkron</th>
             <th class="text-left p-2">Aksi</th>
           </tr>
         </thead>
@@ -58,6 +59,7 @@
               </td>
               <td class="p-2">{p.status}</td>
               <td class="p-2">{p.engagement_score ?? 0}</td>
+              <td class="p-2">{p.last_synced_at ? new Date(p.last_synced_at).toLocaleString() : new Date(p.created_at).toLocaleString()}</td>
               <td class="p-2">
                 <Link href={`/social-posts/${p.id}`} class="px-3 py-1 rounded bg-gray-900 text-white dark:bg-gray-700">Detail</Link>
               </td>

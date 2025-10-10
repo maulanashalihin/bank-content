@@ -43,6 +43,7 @@
           <th class="text-left p-2">URL</th>
           <th class="text-left p-2">Status</th>
           <th class="text-left p-2">Skor</th>
+          <th class="text-left p-2">Terakhir Sinkron</th>
           <th class="text-left p-2">Aksi</th>
         </tr>
       </thead>
@@ -57,6 +58,7 @@
             </td>
             <td class="p-2">{p.status}</td>
             <td class="p-2">{p.engagement_score ?? 0}</td>
+            <td class="p-2">{p.last_synced_at ? new Date(p.last_synced_at).toLocaleString() : new Date(p.created_at).toLocaleString()}</td>
             <td class="p-2 space-x-2">
               {#if p.status === 'pending_verification'}
                 <button on:click={() => verify(p.id, 'verified')} class="px-3 py-1 rounded bg-emerald-600 text-white" disabled={processingId === p.id}>Verify</button>
@@ -64,7 +66,10 @@
               {:else}
                 <span class="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">{p.status}</span>
               {/if}
-              <Link href={`/admin/social-posts/${p.id}`} class="px-3 py-1 rounded bg-gray-900 text-white dark:bg-gray-700">Riwayat Metrik</Link>
+              <Link href={`/admin/social-posts/${p.id}`} class="px-3 py-1 rounded bg-gray-900 text-white dark:bg-gray-700">
+    show
+
+              </Link>
             </td>
           </tr>
         {/each}
