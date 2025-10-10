@@ -2,7 +2,7 @@ import { Request, Response } from "../../type";
 import DB from "../services/DB";
 import { randomUUID } from "crypto";
 
-const ALLOWED_PLATFORMS = ["facebook", "instagram", "x", "tiktok", "youtube"];
+const ALLOWED_PLATFORMS = ["facebook", "instagram", "threads", "x", "tiktok", "youtube"];
 
 class SocialPostController {
   // List social posts for current user

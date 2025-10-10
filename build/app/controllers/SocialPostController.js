@@ -38,7 +38,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const DB_1 = __importDefault(require("../services/DB"));
 const crypto_1 = require("crypto");
-const ALLOWED_PLATFORMS = ["facebook", "instagram", "x", "tiktok", "youtube"];
+const ALLOWED_PLATFORMS = ["facebook", "instagram", "threads", "x", "tiktok", "youtube"];
 class SocialPostController {
     async index(request, response) {
         try {
