@@ -22,7 +22,7 @@ class ContentController {
                 .leftJoin('users', 'contents.user_id', 'users.id')
                 .leftJoin('content_types', 'contents.content_type_id', 'content_types.id')
                 .leftJoin('products', 'contents.product_id', 'products.id')
-                .where('contents.status', 'published');
+                .where('contents.is_public', true);
             const validSortColumns = ['created_at', 'title', 'view_count', 'download_count', 'share_count'];
             const validSortOrders = ['asc', 'desc'];
             const sortColumn = validSortColumns.includes(sortBy) ? sortBy : 'created_at';

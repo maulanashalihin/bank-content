@@ -6,6 +6,7 @@
 
   export let products = [];
   export let contentTypes = [];
+  export let user;
 
   let form = {
     title: '',
@@ -306,7 +307,8 @@
       </div>
 
       <!-- Settings -->
-      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 border border-gray-200 dark:border-gray-700">
+     {#if user.is_admin}
+       <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 border border-gray-200 dark:border-gray-700">
         <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
           ⚙️ Pengaturan
         </h2>
@@ -337,6 +339,7 @@
           </div>
         </div>
       </div>
+     {/if}
 
       <!-- Submit Section -->
       <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 border border-gray-200 dark:border-gray-700">
