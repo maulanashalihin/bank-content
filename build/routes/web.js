@@ -67,6 +67,7 @@ Route.get("/admin/social-posts", [admin_1.default], SocialPostController_1.defau
 Route.get("/admin/social-posts/:id", [admin_1.default], SocialPostController_1.default.adminShow);
 Route.post("/admin/social-posts/:id/verify", [admin_1.default], SocialPostController_1.default.verify);
 Route.post("/admin/social-posts/:id/metrics", [admin_1.default], SocialPostController_1.default.metricsStore);
+Route.post("/admin/social-posts/:id/rewards", [admin_1.default], SocialPostController_1.default.adminRewardStore);
 Route.post("/api/s3/signed-url", [auth_1.default], S3Controller_1.default.getSignedUrl);
 Route.post("/api/s3/product-image-url", [auth_1.default], S3Controller_1.default.getProductImageUrl);
 Route.get("/api/s3/public-url/:fileKey", [auth_1.default], S3Controller_1.default.getPublicUrl);

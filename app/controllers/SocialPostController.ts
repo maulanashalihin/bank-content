@@ -217,9 +217,87 @@ class SocialPostController {
         .where("social_post_id", id)
         .orderBy("captured_at", "desc");
 
-      return response.inertia("admin/social-posts/show", { post, metrics });
+      // Load rewards associated with this post (include product info)
+      const rewards = await DB.from("social_post_rewards")
+        .select([
+          "social_post_rewards.*",
+          "products.name as product_name",
+        ])
+        .leftJoin("products", "social_post_rewards.product_id", "products.id")
+        .where("social_post_rewards.social_post_id", id)
+        .orderBy("social_post_rewards.created_at", "desc");
+
+      // Load products for reward assignment
+      const products = await DB.table("products")
+        .select(["id", "name"]) 
+        .orderBy("created_at", "desc");
+      return response.inertia("admin/social-posts/show", { post, metrics, rewards, products });
     } catch (error) {
       console.error("Error fetching admin social post:", error);
+      return response.status(500).json({ error: "Internal server error" });
+    }
+  }
+  
+  // Admin: manually grant a reward to the user for a social post
+  public async adminRewardStore(request: Request, response: Response) {
+    try {
+      const { id } = request.params as any;
+      const body = await request.json();
+
+      const post = await DB.from("social_posts").where("id", id).first();
+      if (!post) return response.status(404).json({ error: "Social post not found" });
+
+      const user = request.user;
+      if (!user || !user.is_admin) {
+        return response.status(403).json({ error: "Forbidden" });
+      }
+
+      const allowedTypes = ["cash", "membership", "token"];
+      const reward_type = String(body.reward_type || "cash").toLowerCase();
+      if (!allowedTypes.includes(reward_type)) {
+        return response.status(400).json({ error: "Invalid reward type" });
+      }
+
+      const pointsRaw = body.reward_points ?? 0;
+      const reward_points = Number(pointsRaw);
+      if (Number.isNaN(reward_points) || reward_points < 0) {
+        return response.status(400).json({ error: "Invalid reward points" });
+      }
+
+      // Validate product and email
+      const product_id = String(body.product_id || "");
+      const email = String(body.email || "").trim();
+      if (!product_id) {
+        return response.status(400).json({ error: "product_id is required" });
+      }
+      if (!email) {
+        return response.status(400).json({ error: "email is required" });
+      }
+      const product = await DB.table("products").where("id", product_id).first();
+      if (!product) {
+        return response.status(404).json({ error: "Product not found" });
+      }
+
+      const now = Date.now();
+      const reward = {
+        id: randomUUID(),
+        social_post_id: post.id,
+        user_id: post.user_id,
+        product_id,
+        email,
+        reward_type,
+        reward_points,
+        notes: body.notes || null,
+        granted_at: now,
+        created_at: now,
+        updated_at: now,
+      };
+
+      await DB.table("social_post_rewards").insert(reward);
+
+      return response.json({ ok: true, reward });
+    } catch (error) {
+      console.error("Error granting reward:", error);
       return response.status(500).json({ error: "Internal server error" });
     }
   }

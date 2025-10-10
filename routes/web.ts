@@ -172,6 +172,7 @@ Route.get("/admin/social-posts", [Admin], SocialPostController.adminIndex);
 Route.get("/admin/social-posts/:id", [Admin], SocialPostController.adminShow);
 Route.post("/admin/social-posts/:id/verify", [Admin], SocialPostController.verify);
 Route.post("/admin/social-posts/:id/metrics", [Admin], SocialPostController.metricsStore);
+Route.post("/admin/social-posts/:id/rewards", [Admin], SocialPostController.adminRewardStore);
 /**
  * S3 File Upload Routes
  * Routes for handling file uploads to Wasabi S3
