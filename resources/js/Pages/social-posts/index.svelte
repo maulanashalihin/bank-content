@@ -1,7 +1,19 @@
 <script>
   import { Link } from '@inertiajs/svelte';
   import Header from '../../Components/Header.svelte';
+  import PlatformIcon from '../../Components/PlatformIcon.svelte';
+  import dayjs from 'dayjs';
+  import relativeTime from 'dayjs/plugin/relativeTime';
+  import 'dayjs/locale/id';
   export let posts = [];
+  dayjs.extend(relativeTime);
+  dayjs.locale('id');
+
+  function formatSyncTime(ts) {
+    const d = dayjs(ts);
+    const days = dayjs().diff(d, 'day');
+    return days <= 7 ? d.fromNow() : d.format('DD/MM/YYYY, HH:mm');
+  }
 </script>
 
 <svelte:head>
@@ -40,7 +52,7 @@
       <table class="min-w-full text-sm">
         <thead class="bg-gray-100 dark:bg-gray-800">
           <tr>
-            <th class="text-left p-2">Platform</th>
+            <th class="text-left p-2">SM</th>
             <th class="text-left p-2">Judul</th>
             <th class="text-left p-2">URL</th>
             <th class="text-left p-2">Status</th>
@@ -52,16 +64,16 @@
         <tbody>
           {#each posts as p}
             <tr class="border-t border-gray-200 dark:border-gray-700">
-              <td class="p-2 capitalize">{p.platform}</td>
-              <td class="p-2">{p.title || '-'}</td>
+              <td class="p-2"><PlatformIcon platform={p.platform} /></td>
+              <td class="p-2 truncate max-w-[240px]">{p.title || '-'}</td>
               <td class="p-2 truncate max-w-[240px]">
                 <a href={p.post_url} target="_blank" class="text-emerald-600 hover:underline">{p.post_url}</a>
               </td>
               <td class="p-2">{p.status}</td>
               <td class="p-2">{p.engagement_score ?? 0}</td>
-              <td class="p-2">{p.last_synced_at ? new Date(p.last_synced_at).toLocaleString() : new Date(p.created_at).toLocaleString()}</td>
+              <td class="p-2">{formatSyncTime(p.last_synced_at || p.created_at)}</td>
               <td class="p-2">
-                <Link href={`/social-posts/${p.id}`} class="px-3 py-1 rounded bg-gray-900 text-white dark:bg-gray-700">Detail</Link>
+                <Link href={`/social-posts/${p.id}`} class="px-2 py-1 rounded bg-gray-900 text-white dark:bg-gray-700 text-xs">Detail</Link>
               </td>
             </tr>
           {/each}
