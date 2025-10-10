@@ -10,6 +10,7 @@ const HomeController_1 = __importDefault(require("../app/controllers/HomeControl
 const AssetController_1 = __importDefault(require("../app/controllers/AssetController"));
 const ProductController_1 = __importDefault(require("../app/controllers/ProductController"));
 const ContentController_1 = __importDefault(require("../app/controllers/ContentController"));
+const SocialPostController_1 = __importDefault(require("../app/controllers/SocialPostController"));
 const S3Controller_1 = __importDefault(require("../app/controllers/S3Controller"));
 const UserController_1 = __importDefault(require("../app/controllers/UserController"));
 const hyper_express_1 = __importDefault(require("hyper-express"));
@@ -57,6 +58,15 @@ Route.delete("/contents/:id", [auth_1.default], ContentController_1.default.dest
 Route.get("/contents/:id/download", [auth_1.default], ContentController_1.default.download);
 Route.post("/contents/:id/share", [auth_1.default], ContentController_1.default.share);
 Route.get("/shared/:shareId", ContentController_1.default.getSharedContent);
+Route.get("/social-posts", [auth_1.default], SocialPostController_1.default.index);
+Route.get("/social-posts/create", [auth_1.default], SocialPostController_1.default.create);
+Route.post("/social-posts", [auth_1.default], SocialPostController_1.default.store);
+Route.get("/social-posts/:id", [auth_1.default], SocialPostController_1.default.show);
+Route.post("/social-posts/:id/metrics", [auth_1.default], SocialPostController_1.default.metricsStore);
+Route.get("/admin/social-posts", [admin_1.default], SocialPostController_1.default.adminIndex);
+Route.get("/admin/social-posts/:id", [admin_1.default], SocialPostController_1.default.adminShow);
+Route.post("/admin/social-posts/:id/verify", [admin_1.default], SocialPostController_1.default.verify);
+Route.post("/admin/social-posts/:id/metrics", [admin_1.default], SocialPostController_1.default.metricsStore);
 Route.post("/api/s3/signed-url", [auth_1.default], S3Controller_1.default.getSignedUrl);
 Route.post("/api/s3/product-image-url", [auth_1.default], S3Controller_1.default.getProductImageUrl);
 Route.get("/api/s3/public-url/:fileKey", [auth_1.default], S3Controller_1.default.getPublicUrl);

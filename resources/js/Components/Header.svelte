@@ -2,8 +2,7 @@
   import { fly } from 'svelte/transition';
   import { page, router, inertia } from '@inertiajs/svelte';
   import { clickOutside } from '../Components/helper';
-  import DarkModeToggle from './DarkModeToggle.svelte';
-    import LajuIcon from './LajuIcon.svelte';
+  import DarkModeToggle from './DarkModeToggle.svelte'; 
 
   let user = $page.props.user;
  
@@ -16,7 +15,10 @@
     { href: '/home', label: 'Beranda', group: 'home', show : true },  
     { href: '/contents', label: 'Konten', group: 'contents', show : true },
     { href: '/admin/products', label: 'Kelola Produk', group: 'products', show : user && user.is_admin },
+    { href: '/social-posts', label: 'Social Post', group: 'social-posts', show : true },
+    { href: '/admin/social-posts', label: 'Kelola Social Post', group: 'social-posts-admin', show : user.is_admin },
     { href: '/admin/users', label: 'Kelola User', group: 'users', show : user && user.is_admin }, 
+
   ];
  
   

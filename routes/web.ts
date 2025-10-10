@@ -5,6 +5,7 @@ import HomeController from "../app/controllers/HomeController";
 import AssetController from "../app/controllers/AssetController";
 import ProductController from "../app/controllers/ProductController";
 import ContentController from "../app/controllers/ContentController";
+import SocialPostController from "../app/controllers/SocialPostController";
 import S3Controller from "../app/controllers/S3Controller";
 import UserController from "../app/controllers/UserController";
 import HyperExpress from 'hyper-express';
@@ -147,6 +148,30 @@ Route.post("/contents/:id/share", [Auth], ContentController.share);
 
 // Public shared content route (no auth required)
 Route.get("/shared/:shareId", ContentController.getSharedContent);
+
+/**
+ * Social Posts (User & Admin)
+ * ------------------------------------------------
+ * User Routes:
+ * GET    /social-posts - List user's social posts
+ * GET    /social-posts/create - Form submission
+ * POST   /social-posts - Store submission
+ * GET    /social-posts/:id - Show user-owned submission
+ * 
+ * Admin Routes:
+ * GET    /admin/social-posts - List all submissions
+ * POST   /admin/social-posts/:id/verify - Verify/Reject submission
+ */
+Route.get("/social-posts", [Auth], SocialPostController.index);
+Route.get("/social-posts/create", [Auth], SocialPostController.create);
+Route.post("/social-posts", [Auth], SocialPostController.store);
+Route.get("/social-posts/:id", [Auth], SocialPostController.show);
+Route.post("/social-posts/:id/metrics", [Auth], SocialPostController.metricsStore);
+
+Route.get("/admin/social-posts", [Admin], SocialPostController.adminIndex);
+Route.get("/admin/social-posts/:id", [Admin], SocialPostController.adminShow);
+Route.post("/admin/social-posts/:id/verify", [Admin], SocialPostController.verify);
+Route.post("/admin/social-posts/:id/metrics", [Admin], SocialPostController.metricsStore);
 /**
  * S3 File Upload Routes
  * Routes for handling file uploads to Wasabi S3
