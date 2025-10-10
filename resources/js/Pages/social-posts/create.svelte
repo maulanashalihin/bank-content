@@ -27,6 +27,25 @@
     <Link href="/social-posts" class="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700">Kembali</Link>
   </div>
 
+  <!-- Panduan singkat pembuatan Social Post -->
+  <div class="mb-4 rounded border p-4 bg-emerald-50 text-emerald-900 dark:bg-emerald-900/20 dark:text-emerald-200 dark:border-gray-700">
+    <div class="font-semibold mb-2">Panduan Singkat</div>
+    <p class="text-sm mb-2">Kirim tautan posting media sosial yang relevan dengan konten/produk agar dapat diverifikasi dan dilacak performanya.</p>
+    <div class="text-sm">
+      <span class="font-medium">Tips & Ketentuan:</span>
+      <ul class="list-disc ml-5 mt-1 space-y-1">
+        <li>Pastikan posting <span class="font-medium">publik</span> dan dapat diakses tanpa login.</li>
+        <li>Gunakan URL langsung ke posting (contoh: Instagram/TikTok/YouTube), hindari URL yang dipendekkan.</li>
+        <li>Tulis <span class="font-medium">judul</span> yang ringkas dan representatif.</li>
+        <li>Setelah dikirim, status akan menjadi <span class="italic">pending_verification</span> sampai tim memverifikasi.</li>
+        <li>Skor keterlibatan dihitung dari metrik; reward (cash/membership/token) ditentukan admin sesuai performa.</li>
+      </ul>
+    </div>
+    <div class="mt-3">
+      <Link href="/social-posts" class="inline-block px-3 py-1 rounded bg-emerald-600 text-white hover:bg-emerald-700">Lihat Daftar Social Posts</Link>
+    </div>
+  </div>
+
   <form on:submit={submit} class="space-y-4">
     <div>
       <label for="title" class="block mb-1">Judul</label>
@@ -43,7 +62,8 @@
 
     <div>
       <label for="post_url" class="block mb-1">URL Post</label>
-      <input type="url" bind:value={form.post_url} placeholder="https://..." class="w-full rounded border p-2 bg-white dark:bg-gray-800" required />
+      <input type="url" bind:value={form.post_url} placeholder="https://contoh.com/post/123" class="w-full rounded border p-2 bg-white dark:bg-gray-800" required />
+      <p class="mt-1 text-xs text-gray-600 dark:text-gray-400">Pastikan URL publik dan langsung ke posting.</p>
     </div>
  
 

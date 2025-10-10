@@ -72,11 +72,11 @@
         <a href={post.post_url} target="_blank" class="text-emerald-600 hover:underline">{post.post_url}</a>
       </div>
       <div>
-        <div class="text-sm text-gray-500">Skor Keterlibatan</div>
+        <div class="text-sm text-gray-500">Engagement Score</div>
         <div class="font-medium">{post.engagement_score ?? 0}</div>
       </div>
       <div>
-        <div class="text-sm text-gray-500">Terakhir Sinkron</div>
+        <div class="text-sm text-gray-500">Last Synced At</div>
         <div class="font-medium">{post.last_synced_at ? new Date(post.last_synced_at).toLocaleString() : '-'}</div>
       </div>
     </div>
