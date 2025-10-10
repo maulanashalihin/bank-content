@@ -16,6 +16,25 @@
     <Link href="/social-posts/create" class="px-4 py-2 rounded bg-emerald-600 text-white hover:bg-emerald-700">Buat Baru</Link>
   </div>
 
+  <!-- Intro: Pengenalan fitur dan benefit -->
+  <div class="mb-4 rounded border p-4 bg-emerald-50 text-emerald-900 dark:bg-emerald-900/20 dark:text-emerald-200 dark:border-gray-700">
+    <div class="font-semibold mb-2">Apa itu Social Posts?</div>
+    <p class="text-sm mb-2">Fitur ini memudahkan kamu untuk mengirim tautan posting media sosial terkait konten/produk, agar tim kami dapat memverifikasi dan melacak performanya.</p>
+    <div class="text-sm">
+      <span class="font-medium">Benefit:</span>
+      <ul class="list-disc ml-5 mt-1 space-y-1">
+        <li>Submit tautan dari berbagai platform (mis. Instagram, TikTok, YouTube).</li>
+        <li>Pantau skor keterlibatan dan riwayat metrik yang tercatat.</li>
+        <li>Berpeluang mendapatkan reward: cash, membership, atau token.</li>
+        <li>Proses verifikasi transparan: pending, verified, atau rejected.</li>
+        <li>Admin menambahkan reward setelah verifikasi sesuai performa post.</li>
+      </ul>
+    </div>
+    <div class="mt-3">
+      <Link href="/social-posts/create" class="inline-block px-3 py-1 rounded bg-emerald-600 text-white hover:bg-emerald-700">Mulai dengan Buat Baru</Link>
+    </div>
+  </div>
+
   {#if posts && posts.length > 0}
     <div class="overflow-x-auto rounded border border-gray-200 dark:border-gray-700">
       <table class="min-w-full text-sm">
